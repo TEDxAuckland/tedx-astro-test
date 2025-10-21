@@ -1,0 +1,18 @@
+.nav {
+  display: flex;
+
+}
+
+.nav li {
+  list-style: none;
+}
+
+.nav li a {
+  background-color: salmon;
+  list-style: none;
+  padding: 1rem;
+}
+
+.nav li a:hover {
+  background-color: aquamarine;
+}
