@@ -1,4 +1,5 @@
 ---
+import Navigation from "../components/Navigation.astro";
 import "../styles/global.css";
 
 const pageTitle = "Bloggy Mc Blog Face";
@@ -14,17 +15,7 @@ const pageTitle = "Bloggy Mc Blog Face";
 	</head>
 	<body>
 		<div>
-      <ul class="nav">
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/about">About</a>
-        </li>
-        <li>
-          <a href="/blog">Blog</a>
-        </li>
-      </ul>
+			<Navigation />
 		</div>
 		<div>
 			<h1>{pageTitle}</h1>
