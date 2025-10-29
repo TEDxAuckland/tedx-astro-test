@@ -1,9 +1,22 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostListing from '../../components/BlogPostListing.astro';
+import TagList from '../../components/TagList.astro'
+
+import type { MarkdownInstance } from 'astro';
+interface Image { url: string; alt: string; };
+interface Frontmatter {
+  layout: string;
+  title: string;
+  pubDate: string;
+  description: string;
+  author: string;
+  image: Image;
+  tags: string[];
+}
 
 export async function getStaticPaths() {
-  const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
+  const allPosts = Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('../posts/*.md', { eager: true }));
   const uniqueTags = [...new Set(allPosts.map(({ frontmatter: { tags } }) => tags).flat())]
   return uniqueTags.map(tag => ({params: {tag: tag}, props: {posts: allPosts, tags: uniqueTags}}))
 }
@@ -20,24 +33,8 @@ const filteredPosts = posts.filter((post: any) => post.frontmatter.tags?.include
     {filteredPosts.map((post: any) => <BlogPostListing url={post.url} title={post.frontmatter.title} /> )}
   </ul>
 
-  <ul class="tag-list">
-    {tags.map(tag => <li class="tag"><a href={`/tags/${tag}`}>{tag}</a></li>)}
-  </ul>
-
+  <div>
+    <h3>All Tags</h3>
+    <TagList tags={tags} />
+  </div>
 </BaseLayout>
-
-<style>
-  .tag-list {
-    display: flex;
-  }
-
-  .tag-list li {
-    list-style: none;
-    background-color: salmon;
-    margin: .2rem;
-  }
-
-  .tag-list li a {
-    padding: .3rem;
-  }
-</style>

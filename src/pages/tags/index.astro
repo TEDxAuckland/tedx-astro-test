@@ -1,0 +1,26 @@
+---
+import TagList from "../../components/TagList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+
+import type { MarkdownInstance } from 'astro';
+interface Image { url: string; alt: string; };
+interface Frontmatter {
+  layout: string;
+  title: string;
+  pubDate: string;
+  description: string;
+  author: string;
+  image: Image;
+  tags: string[];
+}
+
+const pageTitle = "Tags from the Blog!"
+
+const allPosts = Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('../posts/*.md', { eager: true }));
+const uniqueTags = [...new Set(allPosts.map(({ frontmatter: { tags } }) => tags).flat())]
+---
+<BaseLayout pageTitle={pageTitle}>
+
+  <TagList tags={uniqueTags}
+</BaseLayout>
