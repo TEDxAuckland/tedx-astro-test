@@ -1,36 +1,25 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostListing from '../../components/BlogPostListing.astro';
 import TagList from '../../components/TagList.astro'
 
-import type { MarkdownInstance } from 'astro';
-interface Image { url: string; alt: string; };
-interface Frontmatter {
-  layout: string;
-  title: string;
-  pubDate: string;
-  description: string;
-  author: string;
-  image: Image;
-  tags: string[];
-}
-
 export async function getStaticPaths() {
-  const allPosts = Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('../posts/*.md', { eager: true }));
-  const uniqueTags = [...new Set(allPosts.map(({ frontmatter: { tags } }) => tags).flat())]
+  const allPosts = await getCollection("blog");
+  const uniqueTags = [...new Set(allPosts.map(({ data: { tags } }) => tags).flat())]
   return uniqueTags.map(tag => ({params: {tag: tag}, props: {posts: allPosts, tags: uniqueTags}}))
 }
 
 const { tag } = Astro.params;
 const { posts, tags } = Astro.props;
-const filteredPosts = posts.filter((post: any) => post.frontmatter.tags?.includes(tag));
+const filteredPosts = posts.filter((post) => post.data.tags?.includes(tag));
 ---
 
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
 
   <ul>
-    {filteredPosts.map((post: any) => <BlogPostListing url={post.url} title={post.frontmatter.title} /> )}
+    {filteredPosts.map((post) => <BlogPostListing url={`/posts/${post.id}`} title={post.data.title} /> )}
   </ul>
 
   <div>
