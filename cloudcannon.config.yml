@@ -4,12 +4,17 @@ paths:
   static: public
 collections_config:
   src_pages_posts:
-    path: src/pages/posts
+    path: src/blog
     name: Src Pages Posts
     icon: fit_page_width
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
+    schemas:
+      default:
+        path: schemas/posts.md
+      joe:
+        path: schemas/joepost.md
 timezone: Pacific/Auckland
 markdown:
   engine: commonmark
