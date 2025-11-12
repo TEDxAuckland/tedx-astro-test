@@ -5,7 +5,7 @@ pubDate: 2025-11-12T00:00:00+13:00
 description: first post on cloudcannon
 author: JoMomma
 image:
-  - url:
+    url:
     alt:
 tags: cloudcannon
 ---
