@@ -7,7 +7,9 @@ author: JoMomma
 image:
     url:
     alt:
-tags: cloudcannon
+tags:
+  - cloudcannon
+  - astro
 ---
 # The musings of a one in a million
 
