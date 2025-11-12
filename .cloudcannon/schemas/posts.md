@@ -4,7 +4,8 @@ pubDate:
 description:
 author:
 image:
-  - url:
+    url:
     alt:
 tags:
+  -
 ---

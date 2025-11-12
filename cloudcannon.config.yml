@@ -13,14 +13,14 @@ collections_config:
     disable_file_actions: false
     schemas:
       default:
-        path: schemas/posts.md
+        path: .cloudcannon/schemas/posts.md
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: true
         icon: notes
       joe:
-        path: schemas/joepost.md
+        path: .cloudcannon/schemas/joepost.md
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
